@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/easy_liff/static/css/main.ef84b6a5.css",
+    "main.js": "/easy_liff/static/js/main.3b1e6962.js",
+    "static/js/787.9e9f4ffd.chunk.js": "/easy_liff/static/js/787.9e9f4ffd.chunk.js",
+    "index.html": "/easy_liff/index.html",
+    "main.ef84b6a5.css.map": "/easy_liff/static/css/main.ef84b6a5.css.map",
+    "main.3b1e6962.js.map": "/easy_liff/static/js/main.3b1e6962.js.map",
+    "787.9e9f4ffd.chunk.js.map": "/easy_liff/static/js/787.9e9f4ffd.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ef84b6a5.css",
+    "static/js/main.3b1e6962.js"
+  ]
+}
