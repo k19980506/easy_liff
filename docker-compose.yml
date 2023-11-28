@@ -1,0 +1,30 @@
+version: "3"
+volumes:
+  db_data:
+services:
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "3001:3000" # 映射前端應用的端口
+    volumes:
+      - ./frontend:/frontend
+
+  backend:
+    build:
+      context: .
+    ports:
+      - "3000:3000" # 映射後端應用的端口
+    depends_on:
+      - mongodb
+    command: bash -c "bundle exec rails db:mongoid:create_indexes && bundle exec rails server -b '0.0.0.0'"
+    volumes:
+      - .:/app
+
+  mongodb:
+    image: mongo:latest
+    ports:
+      - "27017:27017" # 映射 MongoDB 的端口
+    command: mongod --bind_ip_all
+    volumes:
+      - db_data:/data/db
