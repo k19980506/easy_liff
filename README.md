@@ -1,24 +1,25 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Docker
 
-Things you may want to cover:
+```
+docker compose build
+docker compose up -d
+```
 
-* Ruby version
+## Document
 
-* System dependencies
+```
+npm i aglio --no-save
+npx aglio -i ./docs/api_document.md -s -p 3002 --theme-variables cyborg
+```
 
-* Configuration
+## Backend
 
-* Database creation
+```
+rails s
+```
 
-* Database initialization
+## Frontend
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Database
