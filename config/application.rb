@@ -23,6 +23,8 @@ module EasyLiff
     config.autoload_lib(ignore: %w(assets tasks))
     config.generators.orm :mongoid
     config.autoloader = :classic
+    config.action_controller.allow_forgery_protection = false
+
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files
