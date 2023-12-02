@@ -3,13 +3,15 @@ require "Date"
 module Api
   module V1
     class UsersController < ApplicationController
+      before_action :validate_date_format, only: [:create]
+
       def index
         @users = User.all
         render json: @users, status: :ok
       end
 
       def show
-        @users = User.find_by(id: params[:id])
+        @users = User.find(params[:id])
         render json: @users, status: :ok
       end
 
@@ -19,8 +21,6 @@ module Api
       end
 
       def create
-        user_params = params.permit(:line_id, user_details: [:name, :date_of_birth, :gender])
-
         # session
         @users =
           user_params[:user_details].map do |user|
@@ -58,6 +58,23 @@ module Api
 
       def user_params
         params.require(:user).permit(:name, :date_of_birth, :gender)
+      end
+
+      private
+
+      def validate_date_format
+        return if params[:user_details].blank?
+
+        unless params[:user_details].all? { |user| valid_date_format?(user[:date_of_birth]) }
+          render json: { error: "Invalid date_of_birth format" }, status: :bad_request
+        end
+      end
+
+      def valid_date_format?(date_string)
+        Date.strptime(date_string, "%Y-%m-%d")
+        true
+      rescue ArgumentError
+        false
       end
     end
   end

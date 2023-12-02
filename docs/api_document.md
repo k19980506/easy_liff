@@ -53,6 +53,8 @@ Create users
   - Attributes (CreateUsersRequestBody)
 - Response 201 (application/json)
   - Attributes (array[User], fixed-type)
+- Response 400 (application/json)
+  - Attributes (BadRequest, fixed-type)
 
 ### Index [GET]
 

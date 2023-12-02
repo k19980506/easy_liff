@@ -1,5 +1,9 @@
 # Data Structures
 
+## BadRequest
+
+- `error`: "error" (string, required)
+
 ## Gender (enum)
 
 ### Members
