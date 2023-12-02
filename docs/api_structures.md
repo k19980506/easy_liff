@@ -1,6 +1,6 @@
 # Data Structures
 
-## BadRequest
+## BadRequest (object)
 
 - `error`: "error" (string, required)
 
@@ -11,12 +11,17 @@
 - `male`
 - `female`
 
-## Participation (object)
+## Status (object)
 
 - `breakfast`: false (boolean, required)
 - `lunch`: false (boolean, required)
 - `dinner`: true (boolean, required)
 - `accommodation`: true (boolean, required)
+
+## Options (object)
+
+- `date`: `2024-02-01` (string, required)
+- status (Status, fixed-type)
 
 ## CreateUsersRequestBody (object)
 
@@ -37,6 +42,7 @@
 
 ## Event (object)
 
-- `id`: 20240201 (number, required)
 - `title`: `202402` (string, required)
-- `participation` (Participation, required)
+- `start_date`: `2024-02-01` (string, required)
+- `end_date`: `2024-02-03` (string, required)
+- `options` (array[Options], required)
