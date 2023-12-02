@@ -21,7 +21,7 @@
 ## Options (object)
 
 - `date`: `2024-02-01` (string, required)
-- status (Status, fixed-type)
+- `status`` (Status, required)
 
 ## CreateUsersRequestBody (object)
 
