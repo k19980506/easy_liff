@@ -18,7 +18,7 @@
 - `dinner`: true (boolean, required)
 - `accommodation`: true (boolean, required)
 
-## Options (object)
+## Option (object)
 
 - `date`: `2024-02-01` (string, required)
 - `status` (Status, required)
@@ -45,4 +45,4 @@
 - `title`: `202402` (string, required)
 - `start_date`: `2024-02-01` (string, required)
 - `end_date`: `2024-02-03` (string, required)
-- `options` (array[Options], required)
+- `options` (array[Option], required)
