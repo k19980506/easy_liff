@@ -3,7 +3,7 @@ development:
     default:
       database: easy_liff_development
       hosts:
-        - localhost:27017
+        - mongodb:27017
       options:
         # The name of the user for authentication.
         # user: 'user'
