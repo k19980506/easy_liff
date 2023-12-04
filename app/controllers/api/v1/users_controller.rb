@@ -21,7 +21,6 @@ module Api
       end
 
       def create
-        # session
         @users =
           user_params[:user_details].map do |user|
             {
@@ -59,8 +58,6 @@ module Api
       def user_params
         params.require(:user).permit(:name, :date_of_birth, :gender)
       end
-
-      private
 
       def validate_date_format
         return if params[:user_details].blank?
