@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :users, except: [:new, :edit]
       resources :events, except: [:new, :edit]
+      resources :attendance_records, except: [:new, :edit]
 
       get "/users/line/:id", to: "users#line", as: "line_users"
     end
