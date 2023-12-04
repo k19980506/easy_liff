@@ -3,7 +3,7 @@ require "Date"
 module Api
   module V1
     class UsersController < ApplicationController
-      before_action :validate_date_format, only: [:create]
+      before_action :validate_date_format, only: [:create, :update]
 
       def index
         @users = User.all

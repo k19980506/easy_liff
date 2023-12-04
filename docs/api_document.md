@@ -16,6 +16,8 @@ Get the user by user id
   - id: `65660e60f4da117ad80301f0` (string) - UUID of the User to retrieve
 - Response 200 (application/json)
   - Attributes (User, fixed-type)
+- Response 404 (application/json)
+  - Attributes (NotFound, fixed-type)
 
 ### Update [PUT]
 
@@ -23,7 +25,14 @@ Update the user by user id
 
 - Parameters
   - id: `65660e60f4da117ad80301f0` (string) - UUID of the user to update
-- Response 200
+- Request
+  - Attributes (UpdateUserRequestBody)
+- Response 200 (application/json)
+  - Attributes (User, fixed-type)
+- Response 400 (application/json)
+  - Attributes (BadRequest, fixed-type)
+- Response 404 (application/json)
+  - Attributes (NotFound, fixed-type)
 
 ### Delete [DELETE]
 
@@ -31,17 +40,9 @@ Delete the user by user id
 
 - Parameters
   - id: `65660e60f4da117ad80301f0` (string) - UUID of the user to delete
-- Response 204
-
-## Line Users [/api/v1/users/line/{id}]
-
-### Get Users by LINE ID [GET]
-
-List users by LINE ID
-
-- Parameters
-  - id: `U4af4980629111` (string) - LINE ID of the users to retrieve
-- Response 200
+- Response 204 (application/json)
+- Response 404 (application/json)
+  - Attributes (NotFound, fixed-type)
 
 ## Users Collection [/api/v1/users]
 
@@ -60,4 +61,137 @@ Create users
 
 List all users
 
-- Response 200
+- Response 200 (application/json)
+
+  - Attributes (array[User], fixed-type)
+
+## Line Users [/api/v1/users/line/{id}]
+
+### Get Users by LINE ID [GET]
+
+List users by LINE ID
+
+- Parameters
+  - id: `U4af4980629111` (string) - LINE ID of the users to retrieve
+- Response 200 (application/json)
+  - Attributes (array[User], fixed-type)
+
+# Group Events
+
+## Event [/api/v1/events/{id}]
+
+### Show [GET]
+
+Get the event by event id
+
+- Parameters
+  - id: `65660e60f4da117ad80301f0` (string) - UUID of the event to retrieve
+- Response 200 (application/json)
+  - Attributes (Event, fixed-type)
+- Response 404 (application/json)
+  - Attributes (NotFound, fixed-type)
+
+### Update [PUT]
+
+Update the event by event id
+
+- Parameters
+  - id: `65660e60f4da117ad80301f0` (string) - UUID of the event to update
+- Request
+  - Attributes (UpdateEventRequestBody)
+- Response 200 (application/json)
+  - Attributes (Event, fixed-type)
+- Response 400 (application/json)
+  - Attributes (BadRequest, fixed-type)
+- Response 404 (application/json)
+  - Attributes (NotFound, fixed-type)
+
+### Delete [DELETE]
+
+Delete the event by event id
+
+- Parameters
+  - id: `65660e60f4da117ad80301f0` (string) - UUID of the event to delete
+- Response 204 (application/json)
+- Response 404 (application/json)
+  - Attributes (NotFound, fixed-type)
+
+## Event Collection [/api/v1/events]
+
+### Create [POST]
+
+Create the event
+
+- Request
+  - Attributes (Event)
+- Response 201 (application/json)
+  - Attributes (Event, fixed-type)
+- Response 400 (application/json)
+  - Attributes (BadRequest, fixed-type)
+
+### Index [GET]
+
+List all events
+
+- Response 200 (application/json)
+  - Attributes (array[Event], fixed-type)
+
+# Group AttendanceRecords
+
+## AttendanceRecord [/api/v1/attendance_records/{id}]
+
+### Show [GET]
+
+Get the attendance record by attendance record id
+
+- Parameters
+  - id: `65660e60f4da117ad80301f0` (string) - UUID of the attendance record to retrieve
+- Response 200 (application/json)
+  - Attributes (AttendanceRecord, fixed-type)
+- Response 404 (application/json)
+  - Attributes (NotFound, fixed-type)
+
+### Update [PUT]
+
+Update the attendance record by attendance record id
+
+- Parameters
+  - id: `65660e60f4da117ad80301f0` (string) - UUID of the attendance record to update
+- Request
+  - Attributes (AttendanceRecord)
+- Response 200 (application/json)
+  - Attributes (AttendanceRecord, fixed-type)
+- Response 400 (application/json)
+  - Attributes (BadRequest, fixed-type)
+- Response 404 (application/json)
+  - Attributes (NotFound, fixed-type)
+
+### Delete [DELETE]
+
+Delete the attendance record by attendance record id
+
+- Parameters
+  - id: `65660e60f4da117ad80301f0` (string) - UUID of the attendance record to delete
+- Response 204 (application/json)
+- Response 404 (application/json)
+  - Attributes (NotFound, fixed-type)
+
+## AttendanceRecord Collection [/api/v1/attendance_records]
+
+### Create [POST]
+
+Create the attendance record
+
+- Request
+  - Attributes (array[AttendanceRecord])
+- Response 201 (application/json)
+  - Attributes (array[AttendanceRecord], fixed-type)
+- Response 400 (application/json)
+  - Attributes (BadRequest, fixed-type)
+
+### Index [GET]
+
+List all attendance records
+
+- Response 200 (application/json)
+  - Attributes (array[AttendanceRecord], fixed-type)

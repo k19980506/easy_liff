@@ -9,6 +9,8 @@ class Event
   field :end_date, type: Date
   field :options, type: Array
 
+  has_many :attendance_records
+
   validates_presence_of :title, :start_date, :end_date, :options
 
   def as_json(options = {})
