@@ -1,4 +1,6 @@
-require "Date"
+# frozen_string_literal: true
+
+require 'Date'
 
 class Event
   include Mongoid::Document
@@ -9,17 +11,15 @@ class Event
   field :end_date, type: Date
   field :options, type: Array
 
-  has_many :attendance_records
+  validates :title, :start_date, :end_date, :options, presence: true
 
-  validates_presence_of :title, :start_date, :end_date, :options
-
-  def as_json(options = {})
+  def as_json(_options = {})
     {
       id: id.to_s,
       title:,
       start_date:,
       end_date:,
-      options: formatted_options,
+      options: formatted_options
     }
   end
 
@@ -28,13 +28,13 @@ class Event
   def formatted_options
     options.map do |option|
       {
-        date: option["date"],
+        date: option['date'],
         status: {
-          breakfast: option["status"]["breakfast"],
-          lunch: option["status"]["lunch"],
-          dinner: option["status"]["dinner"],
-          accommodation: option["status"]["accommodation"],
-        },
+          breakfast: option['status']['breakfast'],
+          lunch: option['status']['lunch'],
+          dinner: option['status']['dinner'],
+          accommodation: option['status']['accommodation']
+        }
       }
     end
   end

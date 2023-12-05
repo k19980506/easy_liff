@@ -67,7 +67,7 @@ List all users
 
 ## Line Users [/api/v1/users/line/{id}]
 
-### Get Users by LINE ID [GET]
+### Get [GET]
 
 List users by LINE ID
 
@@ -75,6 +75,16 @@ List users by LINE ID
   - id: `U4af4980629111` (string) - LINE ID of the users to retrieve
 - Response 200 (application/json)
   - Attributes (array[User], fixed-type)
+
+### Delete [DELETE]
+
+Delete users by LINE ID
+
+- Parameters
+  - id: `U4af4980629111` (string) - LINE ID of the users to delete
+- Response 204 (application/json)
+- Response 404 (application/json)
+  - Attributes (NotFound, fixed-type)
 
 # Group Events
 
@@ -195,3 +205,14 @@ List all attendance records
 
 - Response 200 (application/json)
   - Attributes (array[AttendanceRecord], fixed-type)
+
+# Group Churches
+
+## Church Collection [/api/v1/churches]
+
+### Index [GET]
+
+List all churches name
+
+- Response 200 (application/json)
+  - Attributes (array[string], required)

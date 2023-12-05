@@ -35,6 +35,7 @@
     - `name`: `Jesus` (string, required)
     - `date_of_birth`: `2000-12-25` (string, required)
     - `gender`: `male` (Gender, required)
+    - `church_name`: `neli` (string, required)
 
 ## UpdateUserRequestBody (object)
 
@@ -42,6 +43,7 @@
 - `date_of_birth`: `2000-12-25` (string, optional)
 - `gender`: `male` (Gender, optional)
 - `line_id`: `U4af4980629111` (string, optional)
+- `church_name`: `neli` (string, optional)
 
 ## UpdateEventRequestBody (object)
 
@@ -57,6 +59,7 @@
 - `age`: 25 (number, required)
 - `gender`: `male` (Gender, required)
 - `line_id`: `U4af4980629111` (string, required)
+- `church_name`: `neli` (string, required)
 
 ## Event (object)
 
@@ -70,3 +73,7 @@
 - `user_id`: `65660e60f4da117ad80301f0` (string, required)
 - `event_id`: `656cc604f4da1107bc7b1961` (string, required)
 - `attendance_status` (array[Detail], required)
+
+## Church (object)
+
+- `name`: `neli` (string, required)

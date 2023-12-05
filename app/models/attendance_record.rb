@@ -1,22 +1,23 @@
-require "Date"
+# frozen_string_literal: true
+
+require 'Date'
 
 class AttendanceRecord
   include Mongoid::Document
   include Mongoid::Timestamps
 
   field :attendance_status, type: Array
+  field :user_id, type: String
+  field :event_id, type: String
 
-  belongs_to :user
-  belongs_to :event
+  validates :attendance_status, :user_id, :event_id, presence: true
 
-  validates_presence_of :attendance_status, :user, :event
-
-  def as_json(options = {})
+  def as_json(_options = {})
     {
       id: id.to_s,
-      user_id: user.id.to_s,
-      event_id: event.id.to_s,
-      attendance_status: formatted_attendance_status,
+      user_id:,
+      event_id:,
+      attendance_status: formatted_attendance_status
     }
   end
 
@@ -25,13 +26,13 @@ class AttendanceRecord
   def formatted_attendance_status
     attendance_status.map do |detail|
       {
-        date: detail["date"],
+        date: detail['date'],
         status: {
-          breakfast: detail["status"]["breakfast"],
-          lunch: detail["status"]["lunch"],
-          dinner: detail["status"]["dinner"],
-          accommodation: detail["status"]["accommodation"],
-        },
+          breakfast: detail['status']['breakfast'],
+          lunch: detail['status']['lunch'],
+          dinner: detail['status']['dinner'],
+          accommodation: detail['status']['accommodation']
+        }
       }
     end
   end

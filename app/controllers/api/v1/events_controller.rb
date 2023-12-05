@@ -1,12 +1,13 @@
-require "Date"
+# frozen_string_literal: true
+
+require 'Date'
 
 module Api
   module V1
     class EventsController < ApplicationController
       rescue_from Mongoid::Errors::DocumentNotFound, with: :record_not_found
 
-      before_action :set_event, except: [:index, :create]
-      before_action :validate_date_format, only: [:create, :update]
+      before_action :set_event, except: %i[index create]
 
       def index
         @events = Event.all
@@ -22,7 +23,8 @@ module Api
         if @event.save
           render json: @event, status: :created
         else
-          render json: { error: "Failed to create event", details: @event.errors.full_messages }, status: :unprocessable_entity
+          render json: { error: 'Failed to create event', details: @event.errors.full_messages },
+                 status: :unprocessable_entity
         end
       end
 
@@ -48,13 +50,13 @@ module Api
           :end_date,
           options: [
             :date,
-            status: [
-              :breakfast,
-              :lunch,
-              :dinner,
-              :accommodation,
-            ],
-          ],
+            { status: %i[
+              breakfast
+              lunch
+              dinner
+              accommodation
+            ] }
+          ]
         )
       end
 
@@ -62,23 +64,12 @@ module Api
         @event = Event.find(params[:id])
       end
 
-      def validate_date_format
-        return if params[:options].blank?
-
-        unless valid_date_format?(params[:start_date]) && valid_date_format?(params[:end_date]) && params[:options].all? { |option| valid_date_format?(option[:date]) }
-          render json: { error: "Invalid date format" }, status: :bad_request
-        end
-      end
-
-      def valid_date_format?(date_string)
-        Date.strptime(date_string, "%Y-%m-%d")
-        true
-      rescue ArgumentError
-        false
+      def record_not_found
+        render json: { error: 'Record not found' }, status: :not_found
       end
 
       def record_not_found
-        render json: { error: "Record not found" }, status: :not_found
+        render json: { error: 'Invalid date format' }, status: :bad_request
       end
     end
   end
