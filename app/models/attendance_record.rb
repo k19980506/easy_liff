@@ -1,4 +1,6 @@
-require "Date"
+# frozen_string_literal: true
+
+require 'Date'
 
 class AttendanceRecord
   include Mongoid::Document
@@ -8,14 +10,14 @@ class AttendanceRecord
   field :user_id, type: String
   field :event_id, type: String
 
-  validates_presence_of :attendance_status, :user_id, :event_id
+  validates :attendance_status, :user_id, :event_id, presence: true
 
-  def as_json(options = {})
+  def as_json(_options = {})
     {
       id: id.to_s,
-      user_id: user_id,
-      event_id: event_id,
-      attendance_status: formatted_attendance_status,
+      user_id:,
+      event_id:,
+      attendance_status: formatted_attendance_status
     }
   end
 
@@ -24,13 +26,13 @@ class AttendanceRecord
   def formatted_attendance_status
     attendance_status.map do |detail|
       {
-        date: detail["date"],
+        date: detail['date'],
         status: {
-          breakfast: detail["status"]["breakfast"],
-          lunch: detail["status"]["lunch"],
-          dinner: detail["status"]["dinner"],
-          accommodation: detail["status"]["accommodation"],
-        },
+          breakfast: detail['status']['breakfast'],
+          lunch: detail['status']['lunch'],
+          dinner: detail['status']['dinner'],
+          accommodation: detail['status']['accommodation']
+        }
       }
     end
   end

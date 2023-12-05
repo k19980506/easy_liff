@@ -1,15 +1,18 @@
-require "Date"
+# frozen_string_literal: true
+
+require 'Date'
 
 module Api
   module V1
     class AttendanceRecordsController < ApplicationController
       rescue_from Mongoid::Errors::DocumentNotFound, with: :record_not_found
 
-      before_action :set_attendance_record, except: [:index, :create]
-      before_action :validate_date_format, only: [:create, :update]
+      before_action :set_attendance_record, except: %i[index create]
+      before_action :validate_date_format, only: %i[create update]
 
       def index
         @attendance_records = AttendanceRecord.all
+
         render json: @attendance_records, status: :ok
       end
 
@@ -23,7 +26,8 @@ module Api
         if @attendance_record.save
           render json: @attendance_record, status: :created
         else
-          render json: { error: "Failed to create attendance record", details: @attendance_record.errors.full_messages }, status: :unprocessable_entity
+          render json: { error: 'Failed to create attendance record', details: @attendance_record.errors.full_messages },
+                 status: :unprocessable_entity
         end
       end
 
@@ -37,7 +41,8 @@ module Api
 
       def destroy
         @attendance_record.delete
-        render json: [], status: :no_content
+
+        render status: :no_content
       end
 
       private
@@ -47,14 +52,17 @@ module Api
           :user_id,
           :event_id,
           attendance_status: [
+
             :date,
-            status: [
-              :breakfast,
-              :lunch,
-              :dinner,
-              :accommodation,
-            ],
-          ],
+
+            { status: %i[
+              breakfast
+              lunch
+              dinner
+              accommodation
+            ] }
+
+          ]
         )
       end
 
@@ -65,20 +73,21 @@ module Api
       def validate_date_format
         return if params[:attendance_status].blank?
 
-        unless params[:attendance_status].all? { |detail| valid_date_format?(detail[:date]) }
-          render json: { error: "Invalid date format" }, status: :bad_request
-        end
+        return if params[:attendance_status].all? { |detail| valid_date_format?(detail[:date]) }
+
+        render json: { error: 'Invalid date format' }, status: :bad_request
       end
 
       def valid_date_format?(date_string)
-        Date.strptime(date_string, "%Y-%m-%d")
+        Date.strptime(date_string, '%Y-%m-%d')
+
         true
       rescue ArgumentError
         false
       end
 
       def record_not_found
-        render json: { error: "Record not found" }, status: :not_found
+        render json: { error: 'Record not found' }, status: :not_found
       end
     end
   end
