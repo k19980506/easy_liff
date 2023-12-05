@@ -3,6 +3,10 @@ require "Date"
 module Api
   module V1
     class UsersController < ApplicationController
+      rescue_from Mongoid::Errors::DocumentNotFound, with: :record_not_found
+
+      before_action :set_user, only: [:show, :update, :destroy]
+      before_action :set_line_users, only: [:get_line_users, :delete_line_users]
       before_action :validate_date_format, only: [:create, :update]
 
       def index
@@ -11,28 +15,22 @@ module Api
       end
 
       def show
-        @users = User.find(params[:id])
-        render json: @users, status: :ok
-      end
-
-      def line
-        @users = User.where(line_id: params[:id])
-        render json: @users, status: :ok
+        render json: @user, status: :ok
       end
 
       def create
         @users =
-          user_params[:user_details].map do |user|
-            {
+          create_user_params[:user_details].map do |user|
+            User.new({
               name: user[:name],
               date_of_birth: Date.parse(user[:date_of_birth]),
               gender: user[:gender],
-              line_id: user_params[:line_id],
+              line_id: create_user_params[:line_id],
               church_name: user[:church_name],
-            }
+            })
           end
 
-        if User.create(@users)
+        if @users.all?(&:save)
           render json: @users, status: :created
         else
           render json: { error: "Failed to create user", details: @user.errors.full_messages }, status: :unprocessable_entity
@@ -40,24 +38,43 @@ module Api
       end
 
       def update
-        user = User.find(params[:id])
-
-        if user.update(user_params)
-          render json: user, status: :ok
+        if @user.update(update_user_params)
+          render json: @user, status: :ok
         else
-          render json: { errors: user.errors.full_messages }, status: :unprocessable_entity
+          render json: { errors: @user.errors.full_messages }, status: :unprocessable_entity
         end
       end
 
       def destroy
-        User.where(line_id: params[:line_id]).destroy_all
+        @user.delete
+        render json: [], status: :no_content
+      end
+
+      def get_line_users
+        render json: @users, status: :ok
+      end
+
+      def delete_line_users
+        @users.destroy_all
         render json: [], status: :no_content
       end
 
       private
 
-      def user_params
-        params.permit(:line_id, :church_id, user_details: [:name, :date_of_birth, :gender, :church_name])
+      def set_user
+        @user = User.find(params[:id])
+      end
+
+      def set_line_users
+        @users = User.where(line_id: params[:id])
+      end
+
+      def create_user_params
+        params.permit(:line_id, user_details: [:name, :date_of_birth, :gender, :church_name])
+      end
+
+      def update_user_params
+        params.require(:user).permit(:line_id, :name, :date_of_birth, :gender, :church_name)
       end
 
       def validate_date_format
@@ -73,6 +90,10 @@ module Api
         true
       rescue ArgumentError
         false
+      end
+
+      def record_not_found
+        render json: { error: "Record not found" }, status: :not_found
       end
     end
   end

@@ -7,7 +7,8 @@ Rails.application.routes.draw do
       resources :events, except: [:new, :edit]
       resources :attendance_records, except: [:new, :edit]
 
-      get "/users/line/:id", to: "users#line", as: "line_users"
+      get "/users/line/:id", to: "users#get_line_users"
+      delete "/users/line/:id", to: "users#delete_line_users"
       get "/churches", to: "churches#index"
     end
   end

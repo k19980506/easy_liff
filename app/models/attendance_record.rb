@@ -5,17 +5,16 @@ class AttendanceRecord
   include Mongoid::Timestamps
 
   field :attendance_status, type: Array
+  field :user_id, type: String
+  field :event_id, type: String
 
-  belongs_to :user
-  belongs_to :event
-
-  validates_presence_of :attendance_status, :user, :event
+  validates_presence_of :attendance_status, :user_id, :event_id
 
   def as_json(options = {})
     {
       id: id.to_s,
-      user_id: user.id.to_s,
-      event_id: event.id.to_s,
+      user_id: user_id,
+      event_id: event_id,
       attendance_status: formatted_attendance_status,
     }
   end

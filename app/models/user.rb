@@ -10,8 +10,6 @@ class User
   field :line_id, type: String
   field :church_name, type: String
 
-  has_many :attendance_records
-
   validates_presence_of :name, :date_of_birth, :gender, :line_id
 
   def as_json(options = {})
