@@ -22,7 +22,8 @@ class User
       gender:,
       age: calculate_age,
       line_id:,
-      church_name:
+      church_name:,
+      date_of_birth:
     }
   end
 

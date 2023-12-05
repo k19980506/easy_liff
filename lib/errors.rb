@@ -4,7 +4,7 @@ module Errors
   EXCEPTIONS = {
     'StandardError' => { status: :internal_server_error, error_code: '500-00', name: 'InternalServerError' },
     'BadRequest' => { status: :bad_request, error_code: '400-00', name: 'BadRequest' },
-    'DocumentNotFound' => { status: :not_found, error_code: '404-00', name: 'DocumentNotFound' }
+    'Mongoid::Errors::DocumentNotFound' => { status: :not_found, error_code: '404-00', name: 'DocumentNotFound' }
   }.freeze
 
   class BaseError < StandardError
@@ -42,7 +42,7 @@ module Errors
   def self.create_handler(exception_name)
     unless const_defined?(exception_name)
       const_set(exception_name, Class.new(BaseError))
-      return "Mongoid::Errors::#{exception_name}"
+      return "Errors::#{exception_name}"
     end
     exception_name
   end
