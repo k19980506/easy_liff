@@ -5,8 +5,6 @@ require 'Date'
 module Api
   module V1
     class AttendanceRecordsController < ApplicationController
-      rescue_from Mongoid::Errors::DocumentNotFound, with: :record_not_found
-
       before_action :set_attendance_record, except: %i[index create]
       before_action :validate_date_format, only: %i[create update]
 
@@ -41,7 +39,6 @@ module Api
 
       def destroy
         @attendance_record.delete
-
         render status: :no_content
       end
 
@@ -84,10 +81,6 @@ module Api
         true
       rescue ArgumentError
         false
-      end
-
-      def record_not_found
-        render json: { error: 'Record not found' }, status: :not_found
       end
     end
   end

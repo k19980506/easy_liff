@@ -13,6 +13,7 @@ class User
   field :church_name, type: String
 
   validates :name, :date_of_birth, :gender, :line_id, presence: true
+  validates :name, uniqueness: true
 
   def as_json(_options = {})
     {

@@ -5,8 +5,6 @@ require 'Date'
 module Api
   module V1
     class UsersController < ApplicationController
-      rescue_from Mongoid::Errors::DocumentNotFound, with: :record_not_found
-
       before_action :set_user, only: %i[show update destroy]
       before_action :set_line_users, only: %i[line_users delete_line_users]
       before_action :validate_date_format, only: %i[create update]
@@ -32,9 +30,9 @@ module Api
                      })
           end
 
-        if @users.all?(&:save)
-          render json: @users, status: :created
-        else
+        begin
+          render json: @users, status: :created if @users.all?(&:save)
+        rescue e
           render json: { error: 'Failed to create user', details: @user.errors.full_messages },
                  status: :unprocessable_entity
         end
@@ -93,10 +91,6 @@ module Api
         true
       rescue ArgumentError
         false
-      end
-
-      def record_not_found
-        render json: { error: 'Record not found' }, status: :not_found
       end
     end
   end
