@@ -195,3 +195,14 @@ List all attendance records
 
 - Response 200 (application/json)
   - Attributes (array[AttendanceRecord], fixed-type)
+
+# Group Churches
+
+## Church Collection [/api/v1/churches]
+
+### Index [GET]
+
+List all churches name
+
+- Response 200 (application/json)
+  - Attributes (array[string], required)

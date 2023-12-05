@@ -28,6 +28,7 @@ module Api
               date_of_birth: Date.parse(user[:date_of_birth]),
               gender: user[:gender],
               line_id: user_params[:line_id],
+              church_name: user[:church_name],
             }
           end
 
@@ -56,7 +57,7 @@ module Api
       private
 
       def user_params
-        params.require(:user).permit(:name, :date_of_birth, :gender)
+        params.permit(:line_id, :church_id, user_details: [:name, :date_of_birth, :gender, :church_name])
       end
 
       def validate_date_format

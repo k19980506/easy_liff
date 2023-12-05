@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       resources :attendance_records, except: [:new, :edit]
 
       get "/users/line/:id", to: "users#line", as: "line_users"
+      get "/churches", to: "churches#index"
     end
   end
 end

@@ -8,6 +8,7 @@ class User
   field :date_of_birth, type: Date
   field :gender, type: String
   field :line_id, type: String
+  field :church_name, type: String
 
   has_many :attendance_records
 
@@ -20,6 +21,7 @@ class User
       gender:,
       age: calculate_age,
       line_id:,
+      church_name:,
     }
   end
 

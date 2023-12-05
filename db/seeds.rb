@@ -7,5 +7,8 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
-user = User.new(name: "King", date_of_birth: "20000506", line_id: "U8494498a03acd3ede5951b3d51487e59", gender: "male")
+churches = [{ name: "內壢" }, { name: "三重" }, { name: "汐止" }, { name: "永康" }]
+
+Church.create(churches)
+user = User.new(name: "King", date_of_birth: "2000-05-06", line_id: "U8494498a03acd3ede5951b3d51487e59", gender: "male", church_name: "內壢")
 user.save!
