@@ -1,0 +1,69 @@
+$color-list: (
+  'info': #909399, 
+  'primary': #409eff,
+  'success': #67C23A,
+  'warning': #E6A23C,
+  'danger': #F56C6C,
+
+  'black': #000000,
+  'white': #ffffff,
+  'gray': #bcbcbc,
+  'yellow': #ffee55,
+  'green': #a0ff8a,
+  'purple': #c49cdd,
+
+  'empty': #ffffff00
+);
+
+@each $type, $color in $color-list {
+  .text-#{$type} {
+    color: $color !important;
+  }
+  .hover-text-#{$type} {
+    transition-duration: 0.2s;
+    &:hover{
+      color: lighten($color, 20%) !important;
+    }
+  }
+
+  .bg-#{$type} {
+    background-color: lighten($color, 15%) !important;
+  }
+  .hover-bg-#{$type} {
+    transition-duration: 0.2s;
+    &:hover{
+      background-color: lighten($color, 20%) !important;
+    }
+  }
+
+  .border-#{$type} {
+    border: 1px solid lighten($color, 5%) !important;
+  }
+  .hover-border-#{$type} {
+    transition-duration: 0.2s;
+    &:hover{
+      border: 1px solid lighten($color, 10%) !important;
+    }
+  }
+
+  .card-#{$type} {
+    box-shadow: 2px 2px 8px 1px lighten($color, 20%);
+  }
+  .hover-card-#{$type} {
+    transition-duration: 0.2s;
+    &:hover{
+      box-shadow: 2px 2px 8px 1px lighten($color, 25%);
+    }
+  }
+}
+
+// 目前還未使用
+@mixin systemColor ($type, $color) {
+  .system-color-#{$type} {
+    background-color: $color;
+  }
+}
+
+@include systemColor ('base', #454545);
+@include systemColor ('blue', #324157);
+@include systemColor ('green', #3b723e);

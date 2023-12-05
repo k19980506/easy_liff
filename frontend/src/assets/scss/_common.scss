@@ -1,0 +1,30 @@
+.fill {
+  width: 100%;
+  height: 100%;
+
+  &-x {
+    width: 100%;
+  }
+  &-y {
+    height: 100%;
+  }
+}
+
+.cursor {
+  &-pointer {
+    cursor: pointer;
+  }
+  &-move {
+    cursor: move;
+  }
+}
+
+.hidden-text {
+  color: #ffffff00;
+}
+
+.ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}

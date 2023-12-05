@@ -1,0 +1,114 @@
+/**
+  * element ui plus
+  * Transition name="el-fade-in-linear"
+  * Transition name="el-fade-in-linear"
+
+  * Transition name="el-zoom-in-center"
+  * Transition name="el-zoom-in-top"
+  * Transition name="el-zoom-in-bottom"
+  */
+
+// Transition name="modal"
+.modal-enter-active {
+  transition: opacity 0.25s ease;
+  animation: modal-in 0.25s;
+}
+.modal-leave-active {
+  transition: opacity 0.2s ease;
+  animation: modal-out 0.2s reverse;
+}
+@keyframes modal-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.08);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes modal-out {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+// Transition name="fixed"
+.fixed-enter-active,
+.fixed-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.fixed-enter-from,
+.fixed-leave-to {
+  opacity: 0;
+}
+
+// slide
+@mixin slideTranslate($name, $from-translate, $to-translate) {
+  .slide-#{$name}-enter-active,
+  .slide-#{$name}-leave-active {
+    transition: all 0.3s;
+  }
+
+  .slide-#{$name}-enter-from {
+    opacity: 0;
+    transform: $from-translate;
+  }
+
+  .slide-#{$name}-leave-to {
+    opacity: 0;
+    transform: $to-translate;
+  }
+}
+
+// Transition name="slide-up" mode="out-in"
+@include slideTranslate('up', translateY(30px), translateY(-30px));
+
+// Transition name="slide-down" mode="out-in"
+@include slideTranslate('down', translateY(-30px), translateY(30px));
+
+// Transition name="slide-left" mode="out-in"
+@include slideTranslate('left', translateX(30px), translateX(-30px));
+
+// Transition name="slide-right" mode="out-in"
+@include slideTranslate('right', translateX(-30px), translateX(30px));
+
+// Transition name="fade"
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+// TransitionGroup name="list" tag="ul"
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.5s ease;
+}
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
+}
+
+// TransitionGroup name="flip-list" tag="ul"
+.flip-list-move {
+  transition: transform 0.5s;
+}

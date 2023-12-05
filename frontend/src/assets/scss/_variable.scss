@@ -1,0 +1,44 @@
+// 依照 bootstrap 標準
+$extra-small: 576px;
+$small: 576px;
+$medium: 768px;
+$large: 992px;
+$x-large: 1200px;
+$xx-large: 1400px;
+
+// 系統基本顏色
+$info: #909399;
+$primary: #409eff;
+$success: #67C23A;
+$warning: #E6A23C;
+$danger: #F56C6C;
+$white: #ffffff;
+
+// 系統選單顏色
+// $system-bg-color: #454545;
+$system-bg-color: #324157;
+// $system-bg-color: #3b723e;
+
+// 選單寬度
+$side-width: 62px;
+$nav-md-width: 300px;
+$nav-lg-width: 350px;
+
+/* z-index */
+$loading-index: 3000;
+$login-index: 2090;
+$global-disabled-index: 2080;
+$notification-index: 2050;
+$modal-index: 2005;
+$side-index: 2003; // 大於 element-ul loading
+$v-loading-index: 2000; // element-ul 設定的
+$v-fixed-index: 99;
+$popover-index: 1;
+
+.el-notification {
+  z-index: $notification-index !important;
+}
+.swal2-container.swal2-backdrop-show {
+  z-index: $modal-index;
+}
+
