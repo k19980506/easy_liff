@@ -1,0 +1,74 @@
+// 置中
+%flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex {
+  &-row,
+  &-column {
+    display: flex;
+
+    &-center {
+      @extend %flex-center;
+    }
+  }
+
+  &-column {
+    flex-direction: column;
+
+    &-center {
+      flex-direction: column;
+    }
+  }
+
+  &-center {
+    @extend %flex-center;
+  }
+
+  &-wrap {
+    flex-wrap: wrap;
+  }
+
+  &-nowrap {
+    flex-wrap: nowrap;
+  }
+
+  &-reverse {
+    flex-wrap: wrap-reverse;
+  }
+}
+
+.content {
+  &-center {
+    justify-content: center;
+  }
+  &-between {
+    justify-content: space-between;
+  }
+  &-start {
+    justify-content: flex-start;
+  }
+  &-end {
+    justify-content: flex-end;
+  }
+  &-evenly {
+    justify-content: space-evenly;
+  }
+  &-around {
+    justify-content: space-around;
+  }
+}
+
+.align {
+  &-center {
+    align-items: center;
+  }
+  &-start {
+    align-items: flex-start;
+  }
+  &-end {
+    align-items: flex-end;
+  }
+}

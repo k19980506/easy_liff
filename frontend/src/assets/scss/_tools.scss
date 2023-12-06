@@ -1,0 +1,59 @@
+$size-list: (
+  xxs: 4px,
+  xs: 8px,
+  sm: 12px,
+  md: 16px,
+  lg: 24px,
+  xl: 32px,
+  xxl: 40px
+);
+
+@each $size, $value in $size-list {
+  .i-pa-#{$size} {
+    padding: $value !important;
+  }
+  .i-px-#{$size} {
+    padding: 0 $value !important;
+  }
+  .i-py-#{$size} {
+    padding: $value 0 !important;
+  }
+  .i-pt-#{$size} {
+    padding-top: $value !important;
+  }
+  .i-pb-#{$size} {
+    padding-bottom: $value !important;
+  }
+  .i-pl-#{$size} {
+    padding-left: $value !important;
+  }
+  .i-pr-#{$size} {
+    padding-right: $value !important;
+  }
+
+  .i-ma-#{$size} {
+    margin: $value !important;
+  }
+  .i-mx-#{$size} {
+    margin: 0 $value !important;
+  }
+  .i-my-#{$size} {
+    margin: $value 0 !important;
+  }
+  .i-mt-#{$size} {
+    margin-top: $value !important;
+  }
+  .i-mb-#{$size} {
+    margin-bottom: $value !important;
+  }
+  .i-ml-#{$size} {
+    margin-left: $value !important;
+  }
+  .i-mr-#{$size} {
+    margin-right: $value !important;
+  }
+
+  .i-ga-#{$size} {
+    gap: $value !important;
+  }
+}
