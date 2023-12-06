@@ -11,7 +11,7 @@ class AttendanceRecord
   field :event_id, type: String
 
   validates :attendance_status, :user_id, :event_id, presence: true
-  validates :user_id, uniqueness: true, scope: :event_id
+  validates :user_id, uniqueness: { scope: :event_id }
 
   def as_json(_options = {})
     {
