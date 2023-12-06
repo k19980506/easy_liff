@@ -206,7 +206,7 @@ Delete the attendance record by attendance record id
 Create the attendance record
 
 - Request
-  - Attributes (array[AttendanceRecord])
+  - Attributes (array[CreateAttendanceRecordRequestBody])
 - Response 201 (application/json)
   - Attributes (array[AttendanceRecord], fixed-type)
 - Response 400 (application/json)

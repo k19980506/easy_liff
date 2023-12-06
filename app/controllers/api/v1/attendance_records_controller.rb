@@ -48,18 +48,7 @@ module Api
         params.require(:attendance_record).permit(
           :user_id,
           :event_id,
-          attendance_status: [
-
-            :date,
-
-            { status: %i[
-              breakfast
-              lunch
-              dinner
-              accommodation
-            ] }
-
-          ]
+          attendance_status: [:date, { status: %i[breakfast lunch dinner accommodation] }]
         )
       end
 
@@ -68,19 +57,15 @@ module Api
       end
 
       def validate_date_format
-        return if params[:attendance_status].blank?
+        raise Errors::BadRequest if params[:attendance_status].blank?
 
-        return if params[:attendance_status].all? { |detail| valid_date_format?(detail[:date]) }
-
-        render json: { error: 'Invalid date format' }, status: :bad_request
+        params[:attendance_status].each { |detail| valid_date_format?(detail[:date]) }
       end
 
       def valid_date_format?(date_string)
         Date.strptime(date_string, '%Y-%m-%d')
-
-        true
       rescue ArgumentError
-        false
+        raise Errors::BadRequest
       end
     end
   end

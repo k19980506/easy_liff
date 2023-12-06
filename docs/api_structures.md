@@ -81,6 +81,12 @@
 - `end_date`: `2000-12-25` (string, optional)
 - `options` (array[Detail], optional)
 
+## CreateAttendanceRecordRequestBody (object)
+
+- `user_id`: `65660e60f4da117ad80301f0` (string, required)
+- `event_id`: `656cc604f4da1107bc7b1961` (string, required)
+- `attendance_status` (array[Detail], required)
+
 ## User (object)
 
 - `id`: `65660e60f4da117ad80301f0` (string, required)
@@ -101,8 +107,8 @@
 
 ## AttendanceRecord (object)
 
-- `user_id`: `65660e60f4da117ad80301f0` (string, required)
-- `event_id`: `656cc604f4da1107bc7b1961` (string, required)
+- `user_name`: `King` (string, required)
+- `event_title`: `202312` (string, required)
 - `attendance_status` (array[Detail], required)
 
 ## Church (object)

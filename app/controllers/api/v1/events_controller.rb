@@ -46,15 +46,7 @@ module Api
           :title,
           :start_date,
           :end_date,
-          options: [
-            :date,
-            { status: %i[
-              breakfast
-              lunch
-              dinner
-              accommodation
-            ] }
-          ]
+          options: [:date, { status: %i[breakfast lunch dinner accommodation] }]
         )
       end
 
