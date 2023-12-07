@@ -20,7 +20,7 @@ class User
       id: id.to_s,
       name:,
       gender:,
-      age: calculate_age,
+      age: age,
       line_id:,
       church_name:,
       date_of_birth:
@@ -28,14 +28,6 @@ class User
   end
 
   def age
-    Time.zone.today.year - date_of_birth.year
-  end
-
-  private
-
-  def calculate_age
-    return if date_of_birth.blank?
-
     Time.zone.today.year - date_of_birth.year
   end
 end
