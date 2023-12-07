@@ -11,18 +11,18 @@ module Api
       def index
         @attendance_records = AttendanceRecord.all
 
-        render json: @attendance_records, status: :ok
+        render json: AttendanceRecordResource.new(@attendance_records), status: :ok
       end
 
       def show
-        render json: @attendance_record, status: :ok
+        render json: AttendanceRecordResource.new(@attendance_record), status: :ok
       end
 
       def create
         @attendance_record = AttendanceRecord.new(attendance_record_params)
 
         if @attendance_record.save
-          render json: @attendance_record, status: :created
+          render json: AttendanceRecordResource.new(@attendance_record), status: :created
         else
           render json: { error: 'Failed to create attendance record', details: @attendance_record.errors.full_messages },
                  status: :unprocessable_entity
@@ -31,7 +31,7 @@ module Api
 
       def update
         if @attendance_record.update(attendance_record_params)
-          render json: @attendance_record, status: :ok
+          render json: AttendanceRecordResource.new(@attendance_record), status: :ok
         else
           render json: { errors: @attendance_record.errors.full_messages }, status: :unprocessable_entity
         end

@@ -27,6 +27,10 @@ class User
     }
   end
 
+  def age
+    Time.zone.today.year - date_of_birth.year
+  end
+
   private
 
   def calculate_age

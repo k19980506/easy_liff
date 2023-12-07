@@ -8,7 +8,7 @@ services:
     ports:
       - "3001:3000" # 映射前端應用的端口
     volumes:
-      - ./frontend:/frontend
+      - ./frontend:/app/frontend
 
   backend:
     build:
