@@ -24,7 +24,7 @@
 - `dinner`: true (boolean, required)
 - `accommodation`: true (boolean, required)
 
-## StatusWithCount (Status)
+## Count (object)
 
 - `breakfast_count`: 3 (number, required)
 - `lunch_count`: 2 (number, required)
@@ -39,17 +39,17 @@
 ## DetailWithCount (object)
 
 - `date`: `2024-02-01` (string, required)
-- `status` (StatusWithCount, required)
+- `count` (Count, required)
 
 ## CreateLineUsersRequestBody (object)
 
 - `line_id`: `U4af4980629111` (string, required)
-- `user_details` (array, required)
-  - (object)
-    - `name`: `Jesus` (string, required)
-    - `date_of_birth`: `2000-12-25` (string, required)
-    - `gender`: `male` (Gender, required)
-    - `church_name`: `neli` (string, required)
+- `user_details` (array, fixed-type)
+    - (object)
+        - `name`: `Jesus` (string, required)
+        - `date_of_birth`: `2000-12-25` (string, required)
+        - `gender`: `male` (Gender, required)
+        - `church_name`: `內壢` (string, required)
 
 ## CreateUsersRequestBody (object)
 
@@ -57,7 +57,7 @@
 - `name`: `Jesus` (string, required)
 - `date_of_birth`: `2000-12-25` (string, required)
 - `gender`: `male` (Gender, required)
-- `church_name`: `neli` (string, required)
+- `church_name`: `內壢` (string, required)
 
 ## UpdateUserRequestBody (object)
 
@@ -65,7 +65,7 @@
 - `date_of_birth`: `2000-12-25` (string, optional)
 - `gender`: `male` (Gender, optional)
 - `line_id`: `U4af4980629111` (string, optional)
-- `church_name`: `neli` (string, optional)
+- `church_name`: `內壢` (string, optional)
 
 ## CreateEventRequestBody (object)
 
@@ -87,6 +87,10 @@
 - `event_id`: `656cc604f4da1107bc7b1961` (string, required)
 - `attendance_status` (array[Detail], required)
 
+## UpdateAttendanceRecordRequestBody (object)
+
+- `attendance_status` (array[Detail], required)
+
 ## User (object)
 
 - `id`: `65660e60f4da117ad80301f0` (string, required)
@@ -95,7 +99,7 @@
 - `date_of_birth`: "2000-12-25" (string, required)
 - `gender`: `male` (Gender, required)
 - `line_id`: `U4af4980629111` (string, required)
-- `church_name`: `neli` (string, required)
+- `church_name`: `內壢` (string, required)
 
 ## Event (object)
 
@@ -103,14 +107,16 @@
 - `title`: `202402` (string, required)
 - `start_date`: `2024-02-01` (string, required)
 - `end_date`: `2024-02-03` (string, required)
-- `options` (array[DetailWithCount], required)
+- `attendance` (array[Detail], required)
 
 ## AttendanceRecord (object)
 
-- `user_name`: `King` (string, required)
-- `event_title`: `202312` (string, required)
+- `name`: `King` (string, required)
+- `gender`: `male` (string, required)
+- `age`: 25 (number, required)
+- `title`: `202312` (string, required)
 - `attendance_status` (array[Detail], required)
 
 ## Church (object)
 
-- `name`: `neli` (string, required)
+- `name`: `內壢` (string, required)

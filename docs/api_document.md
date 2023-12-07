@@ -46,17 +46,6 @@ Delete the user by user id
 
 ## Users Collection [/api/v1/users]
 
-### Create [POST]
-
-Create user
-
-- Request
-  - Attributes (CreateUsersRequestBody)
-- Response 201 (application/json)
-  - Attributes (User, fixed-type)
-- Response 400 (application/json)
-  - Attributes (BadRequest, fixed-type)
-
 ### Index [GET]
 
 List all users
@@ -88,7 +77,7 @@ Delete users by LINE ID
 - Response 404 (application/json)
   - Attributes (DocumentNotFound, fixed-type)
 
-### Create [/api/v1/line_users]
+## Create [POST /api/v1/line_users]
 
 Create users
 
@@ -181,7 +170,7 @@ Update the attendance record by attendance record id
 - Parameters
   - id: `65660e60f4da117ad80301f0` (string) - UUID of the attendance record to update
 - Request
-  - Attributes (AttendanceRecord)
+  - Attributes (UpdateAttendanceRecordRequestBody)
 - Response 200 (application/json)
   - Attributes (AttendanceRecord, fixed-type)
 - Response 400 (application/json)
