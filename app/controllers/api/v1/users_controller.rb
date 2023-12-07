@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'Date'
+require 'date'
 
 module Api
   module V1
