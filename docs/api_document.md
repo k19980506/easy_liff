@@ -128,6 +128,17 @@ Delete the event by event id
 - Response 404 (application/json)
   - Attributes (DocumentNotFound, fixed-type)
 
+### Report [GET /api/v1/events/report/{id}]
+
+Get the event report
+
+- Parameters
+  - id: `65660e60f4da117ad80301f0` (string) - UUID of the event to report
+- Response 200 (application/json)
+  - Attributes (EventReport)
+- Response 404 (application/json)
+  - Attributes (DocumentNotFound, fixed-type)
+
 ## Event Collection [/api/v1/events]
 
 ### Create [POST]
