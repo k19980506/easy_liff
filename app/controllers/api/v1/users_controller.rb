@@ -1,15 +1,11 @@
 # frozen_string_literal: true
 
-require 'Date'
+require 'date'
 
 module Api
   module V1
     class UsersController < ApplicationController
-      rescue_from Mongoid::Errors::DocumentNotFound, with: :record_not_found
-
       before_action :set_user, only: %i[show update destroy]
-      before_action :set_line_users, only: %i[line_users delete_line_users]
-      before_action :validate_date_format, only: %i[create update]
 
       def index
         @users = User.all
@@ -21,19 +17,10 @@ module Api
       end
 
       def create
-        @users =
-          create_user_params[:user_details].map do |user|
-            User.new({
-                       name: user[:name],
-                       date_of_birth: Date.parse(user[:date_of_birth]),
-                       gender: user[:gender],
-                       line_id: create_user_params[:line_id],
-                       church_name: user[:church_name]
-                     })
-          end
+        @user = User.new(user_params)
 
-        if @users.all?(&:save)
-          render json: @users, status: :created
+        if @user.save
+          render json: @user, status: :created
         else
           render json: { error: 'Failed to create user', details: @user.errors.full_messages },
                  status: :unprocessable_entity
@@ -41,7 +28,7 @@ module Api
       end
 
       def update
-        if @user.update(update_user_params)
+        if @user.update(user_params)
           render json: @user, status: :ok
         else
           render json: { errors: @user.errors.full_messages }, status: :unprocessable_entity
@@ -53,50 +40,14 @@ module Api
         render status: :no_content
       end
 
-      def line_users
-        render json: @users, status: :ok
-      end
-
-      def delete_line_users
-        @users.destroy_all
-        render status: :no_content
-      end
-
       private
 
       def set_user
         @user = User.find(params[:id])
       end
 
-      def set_line_users
-        @users = User.where(line_id: params[:id])
-      end
-
-      def create_user_params
-        params.permit(:line_id, user_details: %i[name date_of_birth gender church_name])
-      end
-
-      def update_user_params
+      def user_params
         params.require(:user).permit(:line_id, :name, :date_of_birth, :gender, :church_name)
-      end
-
-      def validate_date_format
-        return if params[:user_details].blank?
-
-        return if params[:user_details].all? { |user| valid_date_format?(user[:date_of_birth]) }
-
-        render json: { error: 'Invalid date_of_birth format' }, status: :bad_request
-      end
-
-      def valid_date_format?(date_string)
-        Date.strptime(date_string, '%Y-%m-%d')
-        true
-      rescue ArgumentError
-        false
-      end
-
-      def record_not_found
-        render json: { error: 'Record not found' }, status: :not_found
       end
     end
   end

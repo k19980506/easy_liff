@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'Date'
+require 'date'
 
 class AttendanceRecord
   include Mongoid::Document
@@ -11,15 +11,7 @@ class AttendanceRecord
   field :event_id, type: String
 
   validates :attendance_status, :user_id, :event_id, presence: true
-
-  def as_json(_options = {})
-    {
-      id: id.to_s,
-      user_id:,
-      event_id:,
-      attendance_status: formatted_attendance_status
-    }
-  end
+  validates :user_id, uniqueness: { scope: :event_id }
 
   private
 

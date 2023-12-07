@@ -3,36 +3,12 @@
 require_relative 'boot'
 
 require 'rails'
-begin
-  require 'action_controller/railtie'
-rescue StandardError
-  LoadError
-end
-begin
-  require 'action_view/railtie'
-rescue StandardError
-  LoadError
-end
-begin
-  require 'action_mailer/railtie'
-rescue StandardError
-  LoadError
-end
-begin
-  require 'active_job/railtie'
-rescue StandardError
-  LoadError
-end
-begin
-  require 'action_cable/engine'
-rescue StandardError
-  LoadError
-end
-begin
-  require 'rails/test_unit/railtie'
-rescue StandardError
-  LoadError
-end
+require 'action_controller/railtie'
+require 'action_view/railtie'
+require 'action_mailer/railtie'
+require 'active_job/railtie'
+require 'action_cable/engine'
+require 'rails/test_unit/railtie'
 
 Bundler.require(*Rails.groups)
 

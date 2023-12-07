@@ -8,9 +8,8 @@ Rails.application.routes.draw do
       resources :users, except: %i[new edit]
       resources :events, except: %i[new edit]
       resources :attendance_records, except: %i[new edit]
+      resources :line_users, only: %i[create show destroy]
 
-      get '/users/line/:id', to: 'users#line_users'
-      delete '/users/line/:id', to: 'users#delete_line_users'
       get '/churches', to: 'churches#index'
     end
   end

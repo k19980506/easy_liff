@@ -1,12 +1,10 @@
 # frozen_string_literal: true
 
-require 'Date'
+require 'date'
 
 module Api
   module V1
     class EventsController < ApplicationController
-      rescue_from Mongoid::Errors::DocumentNotFound, with: :record_not_found
-
       before_action :set_event, except: %i[index create]
 
       def index
@@ -38,7 +36,7 @@ module Api
 
       def destroy
         @event.delete
-        render json: [], status: :no_content
+        render status: :no_content
       end
 
       private
@@ -48,28 +46,12 @@ module Api
           :title,
           :start_date,
           :end_date,
-          options: [
-            :date,
-            { status: %i[
-              breakfast
-              lunch
-              dinner
-              accommodation
-            ] }
-          ]
+          options: [:date, { status: %i[breakfast lunch dinner accommodation] }]
         )
       end
 
       def set_event
         @event = Event.find(params[:id])
-      end
-
-      def record_not_found
-        render json: { error: 'Record not found' }, status: :not_found
-      end
-
-      def record_not_found
-        render json: { error: 'Invalid date format' }, status: :bad_request
       end
     end
   end

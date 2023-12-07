@@ -17,7 +17,7 @@ Get the user by user id
 - Response 200 (application/json)
   - Attributes (User, fixed-type)
 - Response 404 (application/json)
-  - Attributes (NotFound, fixed-type)
+  - Attributes (DocumentNotFound, fixed-type)
 
 ### Update [PUT]
 
@@ -32,7 +32,7 @@ Update the user by user id
 - Response 400 (application/json)
   - Attributes (BadRequest, fixed-type)
 - Response 404 (application/json)
-  - Attributes (NotFound, fixed-type)
+  - Attributes (DocumentNotFound, fixed-type)
 
 ### Delete [DELETE]
 
@@ -42,20 +42,9 @@ Delete the user by user id
   - id: `65660e60f4da117ad80301f0` (string) - UUID of the user to delete
 - Response 204 (application/json)
 - Response 404 (application/json)
-  - Attributes (NotFound, fixed-type)
+  - Attributes (DocumentNotFound, fixed-type)
 
 ## Users Collection [/api/v1/users]
-
-### Create [POST]
-
-Create users
-
-- Request
-  - Attributes (CreateUsersRequestBody)
-- Response 201 (application/json)
-  - Attributes (array[User], fixed-type)
-- Response 400 (application/json)
-  - Attributes (BadRequest, fixed-type)
 
 ### Index [GET]
 
@@ -65,7 +54,9 @@ List all users
 
   - Attributes (array[User], fixed-type)
 
-## Line Users [/api/v1/users/line/{id}]
+# Group Line Users
+
+## Line Users [/api/v1/line_users/{id}]
 
 ### Get [GET]
 
@@ -84,7 +75,18 @@ Delete users by LINE ID
   - id: `U4af4980629111` (string) - LINE ID of the users to delete
 - Response 204 (application/json)
 - Response 404 (application/json)
-  - Attributes (NotFound, fixed-type)
+  - Attributes (DocumentNotFound, fixed-type)
+
+## Create [POST /api/v1/line_users]
+
+Create users
+
+- Request
+  - Attributes (CreateLineUsersRequestBody)
+- Response 201 (application/json)
+  - Attributes (array[User], fixed-type)
+- Response 400 (application/json)
+  - Attributes (BadRequest, fixed-type)
 
 # Group Events
 
@@ -99,7 +101,7 @@ Get the event by event id
 - Response 200 (application/json)
   - Attributes (Event, fixed-type)
 - Response 404 (application/json)
-  - Attributes (NotFound, fixed-type)
+  - Attributes (DocumentNotFound, fixed-type)
 
 ### Update [PUT]
 
@@ -114,7 +116,7 @@ Update the event by event id
 - Response 400 (application/json)
   - Attributes (BadRequest, fixed-type)
 - Response 404 (application/json)
-  - Attributes (NotFound, fixed-type)
+  - Attributes (DocumentNotFound, fixed-type)
 
 ### Delete [DELETE]
 
@@ -124,7 +126,7 @@ Delete the event by event id
   - id: `65660e60f4da117ad80301f0` (string) - UUID of the event to delete
 - Response 204 (application/json)
 - Response 404 (application/json)
-  - Attributes (NotFound, fixed-type)
+  - Attributes (DocumentNotFound, fixed-type)
 
 ## Event Collection [/api/v1/events]
 
@@ -133,7 +135,7 @@ Delete the event by event id
 Create the event
 
 - Request
-  - Attributes (Event)
+  - Attributes (CreateEventRequestBody)
 - Response 201 (application/json)
   - Attributes (Event, fixed-type)
 - Response 400 (application/json)
@@ -159,7 +161,7 @@ Get the attendance record by attendance record id
 - Response 200 (application/json)
   - Attributes (AttendanceRecord, fixed-type)
 - Response 404 (application/json)
-  - Attributes (NotFound, fixed-type)
+  - Attributes (DocumentNotFound, fixed-type)
 
 ### Update [PUT]
 
@@ -168,13 +170,13 @@ Update the attendance record by attendance record id
 - Parameters
   - id: `65660e60f4da117ad80301f0` (string) - UUID of the attendance record to update
 - Request
-  - Attributes (AttendanceRecord)
+  - Attributes (UpdateAttendanceRecordRequestBody)
 - Response 200 (application/json)
   - Attributes (AttendanceRecord, fixed-type)
 - Response 400 (application/json)
   - Attributes (BadRequest, fixed-type)
 - Response 404 (application/json)
-  - Attributes (NotFound, fixed-type)
+  - Attributes (DocumentNotFound, fixed-type)
 
 ### Delete [DELETE]
 
@@ -184,7 +186,7 @@ Delete the attendance record by attendance record id
   - id: `65660e60f4da117ad80301f0` (string) - UUID of the attendance record to delete
 - Response 204 (application/json)
 - Response 404 (application/json)
-  - Attributes (NotFound, fixed-type)
+  - Attributes (DocumentNotFound, fixed-type)
 
 ## AttendanceRecord Collection [/api/v1/attendance_records]
 
@@ -193,7 +195,7 @@ Delete the attendance record by attendance record id
 Create the attendance record
 
 - Request
-  - Attributes (array[AttendanceRecord])
+  - Attributes (array[CreateAttendanceRecordRequestBody])
 - Response 201 (application/json)
   - Attributes (array[AttendanceRecord], fixed-type)
 - Response 400 (application/json)

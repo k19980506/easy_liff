@@ -1,30 +1,28 @@
 # frozen_string_literal: true
 
-require 'Date'
+require 'date'
 
 module Api
   module V1
     class AttendanceRecordsController < ApplicationController
-      rescue_from Mongoid::Errors::DocumentNotFound, with: :record_not_found
-
       before_action :set_attendance_record, except: %i[index create]
       before_action :validate_date_format, only: %i[create update]
 
       def index
         @attendance_records = AttendanceRecord.all
 
-        render json: @attendance_records, status: :ok
+        render json: AttendanceRecordResource.new(@attendance_records), status: :ok
       end
 
       def show
-        render json: @attendance_record, status: :ok
+        render json: AttendanceRecordResource.new(@attendance_record), status: :ok
       end
 
       def create
         @attendance_record = AttendanceRecord.new(attendance_record_params)
 
         if @attendance_record.save
-          render json: @attendance_record, status: :created
+          render json: AttendanceRecordResource.new(@attendance_record), status: :created
         else
           render json: { error: 'Failed to create attendance record', details: @attendance_record.errors.full_messages },
                  status: :unprocessable_entity
@@ -33,7 +31,7 @@ module Api
 
       def update
         if @attendance_record.update(attendance_record_params)
-          render json: @attendance_record, status: :ok
+          render json: AttendanceRecordResource.new(@attendance_record), status: :ok
         else
           render json: { errors: @attendance_record.errors.full_messages }, status: :unprocessable_entity
         end
@@ -41,7 +39,6 @@ module Api
 
       def destroy
         @attendance_record.delete
-
         render status: :no_content
       end
 
@@ -51,18 +48,7 @@ module Api
         params.require(:attendance_record).permit(
           :user_id,
           :event_id,
-          attendance_status: [
-
-            :date,
-
-            { status: %i[
-              breakfast
-              lunch
-              dinner
-              accommodation
-            ] }
-
-          ]
+          attendance_status: [:date, { status: %i[breakfast lunch dinner accommodation] }]
         )
       end
 
@@ -71,23 +57,15 @@ module Api
       end
 
       def validate_date_format
-        return if params[:attendance_status].blank?
+        raise Errors::BadRequest if params[:attendance_status].blank?
 
-        return if params[:attendance_status].all? { |detail| valid_date_format?(detail[:date]) }
-
-        render json: { error: 'Invalid date format' }, status: :bad_request
+        params[:attendance_status].each { |detail| valid_date_format?(detail[:date]) }
       end
 
       def valid_date_format?(date_string)
         Date.strptime(date_string, '%Y-%m-%d')
-
-        true
       rescue ArgumentError
-        false
-      end
-
-      def record_not_found
-        render json: { error: 'Record not found' }, status: :not_found
+        raise Errors::BadRequest
       end
     end
   end
