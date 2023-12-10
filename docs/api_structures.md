@@ -31,7 +31,6 @@
 - `total_baby_member`: 0 (number, required)
 - `total_primary_member`: 0 (number, required)
 - `total_junior_member`: 0 (number, required)
-- `total_senior_member`: 0 (number, required)
 - `details` (DailyReport)
 
 ## Gender (enum)
@@ -109,7 +108,8 @@
 
 - `user_id`: `65660e60f4da117ad80301f0` (string, required)
 - `event_id`: `656cc604f4da1107bc7b1961` (string, required)
-- `attendance_status` (array[Detail], required)
+- `attendance`: true (boolean, reuired)
+- `attendance_status` (array[Detail], nullable)
 
 ## UpdateAttendanceRecordRequestBody (object)
 
@@ -138,8 +138,10 @@
 - `name`: `King` (string, required)
 - `gender`: `male` (string, required)
 - `age`: 25 (number, required)
+- `church_name`: `內壢` (string, required)
 - `title`: `202312` (string, required)
-- `attendance_status` (array[Detail], required)
+- `attendance`: true (boolean, required)
+- `attendance_status` (array[Detail], nullable)
 
 ## Church (object)
 
