@@ -28,8 +28,11 @@ module Api
       end
 
       def destroy
+        user_ids = @line_users.map(&:id)
+        AttendanceRecord.where('user_id' => { '$in' => user_ids }).destroy_all
         @line_users.destroy_all
-        render status: :no_content
+
+        head :no_content
       end
 
       private

@@ -42,7 +42,7 @@ module Api
 
       def destroy
         @attendance_record.delete
-        render status: :no_content
+        head :no_content
       end
 
       private
