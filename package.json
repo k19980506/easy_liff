@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "eslint-plugin-react-hooks": "^5.0.0-canary-aba93acb6-20231205"
+  }
+}

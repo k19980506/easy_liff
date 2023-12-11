@@ -2,9 +2,6 @@ import { useState, useEffect } from 'react'
 import ajax from '@/lib/ajax.js'
 import { useMount } from '@/lib/hook.js'
 
-import reactLogo from '@/assets/images/react.svg'
-import viteLogo from '/vite.svg'
-
 const getTodosData = async () => {
   const res = await ajax({
     url: '/todos',
@@ -32,7 +29,7 @@ const getTodosData = async () => {
   return res
 }
 
-function ApiTest () {
+function AttendanceRecordView () {
   const [apiData, setApiData] = useState([])
 
   useEffect(() => {
@@ -46,11 +43,9 @@ function ApiTest () {
 
   return (
     <div className='text-danger border-success'>
-      <img src={viteLogo} className="logo" alt="Vite logo" />
-      <img src={reactLogo} className="logo react" alt="React logo" />
-      <h3>ApiTest</h3>
+      <h3>AttendanceRecordView</h3>
     </div>
   )
 }
 
-export default ApiTest
+export default AttendanceRecordView

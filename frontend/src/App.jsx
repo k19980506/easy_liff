@@ -1,27 +1,30 @@
 // import { useState } from 'react'
-import reactLogo from './assets/images/react.svg'
-import viteLogo from '/vite.svg'
 import './App.scss'
-import SignupForm from '@/pages/SignUpForm/SignUpForm.jsx'
-import ApiTest from '@/pages/ApiTest.jsx'
+import AppLayout from './components/AppLayout'
+import {
+  BrowserRouter
+  // HashRouter
+} from 'react-router-dom'
+import View from '@/components/AppLayout/View.jsx'
+
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { fas } from '@fortawesome/free-solid-svg-icons'
+import { fab } from '@fortawesome/free-brands-svg-icons'
+import { far } from '@fortawesome/free-regular-svg-icons'
+
+library.add(fas, fab, far)
 
 function App () {
   // const [count, setCount] = useState(0)
 
   return (
-    <>
-      <div className='text-danger border-success' style={{ display: 'none' }}>
-        <img src={viteLogo} className="logo" alt="Vite logo" />
-        <img src={reactLogo} className="logo react" alt="React logo" />
-        <h3>test</h3>
-      </div>
-
-      <SignupForm />
-
-      <div className='i-ma-lg'>
-        <ApiTest />
-      </div>
-    </>
+    <div className="app">
+      <BrowserRouter>
+        <AppLayout>
+          <View></View>
+        </AppLayout>
+      </BrowserRouter>
+    </div>
   )
 }
 

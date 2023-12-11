@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'Date'
+require 'date'
 
 class AttendanceRecord
   include Mongoid::Document
