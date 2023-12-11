@@ -21,14 +21,17 @@ module Api
       def create
         @attendance_records =
           create_attendance_record_params.map do |attendance_record|
+            user = User.find(attendance_record[:user_id])
+            event = Event.find(attendance_record[:event_id])
+            attendance_record.merge!({ user:, event: })
+
             AttendanceRecord.new(attendance_record)
           end
 
         if @attendance_records.all?(&:save)
           render json: AttendanceRecordResource.new(@attendance_records), status: :created
         else
-          render json: { error: 'Failed to create attendance record', details: @attendance_record.errors.full_messages },
-                 status: :unprocessable_entity
+          render json: { error: 'Failed to create attendance records' }, status: :unprocessable_entity
         end
       end
 

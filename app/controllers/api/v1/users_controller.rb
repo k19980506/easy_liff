@@ -36,8 +36,7 @@ module Api
       end
 
       def destroy
-        AttendanceRecord.where('user_id' => @user.id.to_s).destroy_all
-        @user.delete
+        @user.destroy
 
         head :no_content
       end

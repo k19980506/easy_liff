@@ -119,7 +119,7 @@
 
 - `id`: `65660e60f4da117ad80301f0` (string, required)
 - `name`: `Jesus` (string, required)
-- `age`: 25 (number, required)
+- `grade`: 25 (number, required)
 - `date_of_birth`: `2000-12-25` (string, required)
 - `gender`: `male` (Gender, required)
 - `line_id`: `U4af4980629111` (string, required)
@@ -137,7 +137,7 @@
 
 - `name`: `King` (string, required)
 - `gender`: `male` (string, required)
-- `age`: 25 (number, required)
+- `grade`: 25 (number, required)
 - `church_name`: `內壢` (string, required)
 - `title`: `202312` (string, required)
 - `attendance`: true (boolean, required)

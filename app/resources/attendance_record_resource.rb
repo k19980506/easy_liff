@@ -2,10 +2,10 @@
 
 class AttendanceRecordResource < ApplicationResource
   attribute(:id) { |resource| resource.id.to_s }
-  attribute(:name) { |resource| User.find(resource.user_id).name }
-  attribute(:gender) { |resource| User.find(resource.user_id).gender }
-  attribute(:age) { |resource| User.find(resource.user_id).age }
-  attribute(:church_name) { |resource| User.find(resource.user_id).church_name }
-  attribute(:title) { |resource| Event.find(resource.event_id).title }
+  attribute(:name) { |resource| resource.user.name }
+  attribute(:gender) { |resource| resource.user.gender }
+  attribute(:grade) { |resource| resource.user.grade }
+  attribute(:church_name) { |resource| resource.user.church_name }
+  attribute(:title) { |resource| resource.event.title }
   attributes :attendance, :attendance_status
 end
