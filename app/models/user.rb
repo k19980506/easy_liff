@@ -30,7 +30,7 @@ class User
   end
 
   def grade
-    academic_year(Time.zone.today.year) - academic_year(date_of_birth)
+    academic_year(Time.zone.today) - academic_year(date_of_birth)
   end
 
   private
