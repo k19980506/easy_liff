@@ -1,9 +1,11 @@
 # frozen_string_literal: true
 
 class AttendanceRecordResource < ApplicationResource
-  attribute(:name) { |resource| User.find(resource.user_id).name }
-  attribute(:gender) { |resource| User.find(resource.user_id).gender }
-  attribute(:age) { |resource| User.find(resource.user_id).age }
-  attribute(:title) { |resource| Event.find(resource.event_id).title }
-  attributes :attendance_status
+  attribute(:id) { |resource| resource.id.to_s }
+  attribute(:name) { |resource| resource.user.name }
+  attribute(:gender) { |resource| resource.user.gender }
+  attribute(:grade) { |resource| resource.user.grade }
+  attribute(:church_name) { |resource| resource.user.church_name }
+  attribute(:title) { |resource| resource.event.title }
+  attributes :attendance, :attendance_status
 end

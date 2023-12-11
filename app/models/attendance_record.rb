@@ -6,26 +6,12 @@ class AttendanceRecord
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  field :attendance_status, type: Array
-  field :user_id, type: String
-  field :event_id, type: String
+  field :attendance, type: Boolean
+  field :attendance_status, type: Array, default: []
 
-  validates :attendance_status, :user_id, :event_id, presence: true
-  validates :user_id, uniqueness: { scope: :event_id }
+  validates :attendance, presence: true
+  validates :user, uniqueness: { scope: :event }
 
-  private
-
-  def formatted_attendance_status
-    attendance_status.map do |detail|
-      {
-        date: detail['date'],
-        status: {
-          breakfast: detail['status']['breakfast'],
-          lunch: detail['status']['lunch'],
-          dinner: detail['status']['dinner'],
-          accommodation: detail['status']['accommodation']
-        }
-      }
-    end
-  end
+  belongs_to :user
+  belongs_to :event
 end

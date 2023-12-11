@@ -19,18 +19,24 @@ module Api
       end
 
       def create
-        @attendance_record = AttendanceRecord.new(attendance_record_params)
+        @attendance_records =
+          create_attendance_record_params.map do |attendance_record|
+            user = User.find(attendance_record[:user_id])
+            event = Event.find(attendance_record[:event_id])
+            attendance_record.merge!({ user:, event: })
 
-        if @attendance_record.save
-          render json: AttendanceRecordResource.new(@attendance_record), status: :created
+            AttendanceRecord.new(attendance_record)
+          end
+
+        if @attendance_records.all?(&:save)
+          render json: AttendanceRecordResource.new(@attendance_records), status: :created
         else
-          render json: { error: 'Failed to create attendance record', details: @attendance_record.errors.full_messages },
-                 status: :unprocessable_entity
+          render json: { error: 'Failed to create attendance records' }, status: :unprocessable_entity
         end
       end
 
       def update
-        if @attendance_record.update(attendance_record_params)
+        if @attendance_record.update(update_attendance_record_params)
           render json: AttendanceRecordResource.new(@attendance_record), status: :ok
         else
           render json: { errors: @attendance_record.errors.full_messages }, status: :unprocessable_entity
@@ -39,16 +45,44 @@ module Api
 
       def destroy
         @attendance_record.delete
-        render status: :no_content
+        head :no_content
       end
 
       private
 
-      def attendance_record_params
+      def create_attendance_record_params
+        params.require(:_json).map do |param|
+          param.permit(
+            :user_id,
+            :event_id,
+            :attendance,
+            attendance_status: [
+              :date,
+              { status: %i[
+                breakfast
+                lunch
+                dinner
+                accommodation
+              ] }
+            ]
+          )
+        end
+      end
+
+      def update_attendance_record_params
         params.require(:attendance_record).permit(
           :user_id,
           :event_id,
-          attendance_status: [:date, { status: %i[breakfast lunch dinner accommodation] }]
+          :attendance,
+          attendance_status: [
+            :date,
+            { status: %i[
+              breakfast
+              lunch
+              dinner
+              accommodation
+            ] }
+          ]
         )
       end
 
@@ -57,7 +91,7 @@ module Api
       end
 
       def validate_date_format
-        raise Errors::BadRequest if params[:attendance_status].blank?
+        return if params[:attendance_status].blank?
 
         params[:attendance_status].each { |detail| valid_date_format?(detail[:date]) }
       end

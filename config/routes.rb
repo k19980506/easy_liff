@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       resources :attendance_records, except: %i[new edit]
       resources :line_users, only: %i[create show destroy]
 
+      get '/events/report/:id', to: 'events#report'
       get '/churches', to: 'churches#index'
     end
   end

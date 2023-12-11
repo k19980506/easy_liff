@@ -36,8 +36,9 @@ module Api
       end
 
       def destroy
-        @user.delete
-        render status: :no_content
+        @user.destroy
+
+        head :no_content
       end
 
       private

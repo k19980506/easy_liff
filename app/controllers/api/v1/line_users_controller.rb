@@ -29,7 +29,8 @@ module Api
 
       def destroy
         @line_users.destroy_all
-        render status: :no_content
+
+        head :no_content
       end
 
       private

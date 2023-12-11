@@ -15,19 +15,27 @@ class User
   validates :name, :date_of_birth, :gender, :line_id, presence: true
   validates :name, uniqueness: true
 
+  has_many :attendance_records, dependent: :delete_all
+
   def as_json(_options = {})
     {
       id: id.to_s,
       name:,
       gender:,
-      age: age,
+      grade:,
       line_id:,
       church_name:,
       date_of_birth:
     }
   end
 
-  def age
-    Time.zone.today.year - date_of_birth.year
+  def grade
+    academic_year(Time.zone.today) - academic_year(date_of_birth)
+  end
+
+  private
+
+  def academic_year(date)
+    date.month >= 9 ? date.year + 1 : date.year
   end
 end
