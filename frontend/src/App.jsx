@@ -15,8 +15,6 @@ import { far } from '@fortawesome/free-regular-svg-icons'
 library.add(fas, fab, far)
 
 function App () {
-  // const [count, setCount] = useState(0)
-
   return (
     <div className="app">
       <BrowserRouter>
