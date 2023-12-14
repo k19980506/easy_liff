@@ -12,10 +12,18 @@ import { Carousel } from 'antd'
 import throttle from '@/lib/throttle.js'
 import { useMount } from '@/lib/hook.js'
 
-import { isEmpty } from '@/lib/utils.js'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import DesktopView from './DesktopView'
+import PhoneView from './PhoneView'
 
 const systemURL = import.meta.env.VITE_API_SYSTEM_URL
+
+let vh = window.innerHeight * 0.01
+document.documentElement.style.setProperty('--vh', `${vh}px`)
+
+window.addEventListener('resize', () => {
+  let vh = window.innerHeight * 0.01
+  document.documentElement.style.setProperty('--vh', `${vh}px`)
+})
 
 function AppLayout (props) {
   const navigate = useNavigate()
@@ -23,18 +31,18 @@ function AppLayout (props) {
   const [current, setCurrent] = useState('')
 
   const changeRouter = (key) => {
-    navigate(`${systemURL}${key}`)
+    navigate(`${systemURL}/${key}`)
   }
 
   useEffect(() => {
     changeRouter(current)
   }, [current])
 
-  const [homeWidth, setWidth] = useState(0)
+  // const [homeWidth, setWidth] = useState(0)
   const [homeHeight, setHeight] = useState(0)
 
   const updateSize = (_width, _height) => {
-    setWidth(_width)
+    // setWidth(_width)
     setHeight(_height)
   }
 
@@ -89,47 +97,23 @@ function AppLayout (props) {
         </div>
       </div>
 
-      <div
-        className={`layout-view ${isEmpty(current) ? 'is-hidden' : 'is-show'}`}
-        style={{
-          // left: `${homeWidth}px`,
-          top: `${homeHeight}px`
-        }}
+      <DesktopView
+        homeHeight={homeHeight}
+        current={current}
+        setCurrent={setCurrent}
       >
-        <div className='view view-nav'>
-          <div className='nav-routes'>
-            <nav
-              className='nav-route'
-              onClick={() => setCurrent('')}
-            >
-              <div className='nav-title'>
-                <FontAwesomeIcon icon="fa-solid fa-arrow-left" className='icon'/>
-                <label>{ '首頁' }</label>
-              </div>
-            </nav>
-            {
-              routes.map(route => {
-                return (
-                  <nav
-                    key={route.key}
-                    className='nav-route'
-                    onClick={() => setCurrent(route.key)}
-                  >
-                    <div className='nav-title'>
-                      <FontAwesomeIcon icon={route.icon} className='icon'/>
-                      <label>{route.title}</label>
-                    </div>
-                  </nav>
-                )
-              })
-            }
-          </div>
-        </div>
+        <h3>DesktopView</h3>
+        { props.children ?? <div>slot</div> }
+      </DesktopView>
 
-        <div className='view-slot'>
-          { props.children ?? <div>slot</div> }
-        </div>
-      </div>
+      <PhoneView
+        homeHeight={homeHeight}
+        current={current}
+        setCurrent={setCurrent}
+      >
+        <h3>PhoneView</h3>
+        { props.children ?? <div>slot</div> }
+      </PhoneView>
     </div>
   )
 }

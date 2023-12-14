@@ -1,5 +1,5 @@
-$baseNavHeight: 280px;
-$lgNavHeight: 230px;
+$home-nav-height: 280px;
+$home-nav-height-lg: 160px;
 
 @mixin elPosition ($z-index) {
   width: 100%;
@@ -11,9 +11,11 @@ $lgNavHeight: 230px;
 }
 
 .layout {
+  // 首頁
   &-wrapper {
     width: 100vw;
-    height: 100vh;
+    // height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
     overflow: hidden;
     position: relative;
   }
@@ -82,14 +84,15 @@ $lgNavHeight: 230px;
     &-route {
       cursor: pointer;
       width: 28%;
-      height: $baseNavHeight;
+      height: $home-nav-height;
       position: relative;
       overflow: hidden;
       transition-duration: 0.2s;
       border: 1px solid lighten(#38470b99, 80%);
 
       @media (max-width: $large) {
-        height: $lgNavHeight;
+        width: 40%;
+        height: $home-nav-height-lg;
       }
 
       & > .img,
@@ -112,21 +115,37 @@ $lgNavHeight: 230px;
 
         transition-duration: 0.3s;
         color: #fff;
-        top: $baseNavHeight;
+        top: $home-nav-height;
+        will-change: top;
 
         & > label {
           cursor: pointer;
         }
 
         @media (max-width: $large) {
-          top: $lgNavHeight;
+          top: $home-nav-height-lg;
           font-size: 1.5em;
+        }
+
+        @media (max-width: $medium) {
+          top: 0;
+          font-size: 1.3em;
         }
       }
 
       & > .bg {
         transition-duration: 0.3s;
         background-color: #c0c0c060;
+      }
+
+      @media (max-width: $medium) {
+        .title {
+          color: #d7c147;
+          top: 0;
+        }
+        .bg {
+          background-color: #38470b63;
+        }
       }
 
       &:hover {        
@@ -141,7 +160,11 @@ $lgNavHeight: 230px;
     }
   }
 
-  &-view {
+  // 電腦版
+  $nav-width: 240px;
+  $nav-width-lg: 200px;
+
+  &-desktop {
     width: 100%;
     height: 100%;
     position: absolute;
@@ -149,23 +172,38 @@ $lgNavHeight: 230px;
     
     z-index: 9;
     transition-duration: 0.3s;
-    display: flex;
     overflow: hidden;
 
-    // &.is-hidden {}
+    display: flex;
+    @media (max-width: $medium) {
+      display: none;
+    }
+
+    &.is-hidden {
+      opacity: 0;
+    }
     &.is-show {
       opacity: 1;
       top: 0 !important;
       left: 0 !important;
     }
   }
-  .view {
+
+  .desktop {
     &-nav {
-      width: 260px;
+      width: $nav-width;
       height: 100%;
       border: 1px solid #adadad;
       display: flex;
       flex-direction: column;
+      position: relative;
+      overflow-y: auto;
+      transition-duration: 0.2s;
+
+      @media (max-width: $large) {
+        width: $nav-width-lg;
+        font-size: 0.9em;
+      }
     }
     .nav {
       &-routes {
@@ -202,12 +240,18 @@ $lgNavHeight: 230px;
         display: flex;
         align-items: center;
         gap: 16px;
-        & > .icon {
-          width: 30px;
+        .icon {
+          width: 30px !important;
         }
-        & > label {
+        & label {
           width: 100%;
           cursor: pointer;
+        }
+
+        &-left {
+          width: inherit;
+          display: flex;
+          gap: 16px; 
         }
       }
     }
@@ -217,7 +261,145 @@ $lgNavHeight: 230px;
       width: 100%;
       height: 100%;
       padding: 16px;
+      overflow: hidden;
+    }
+  }
+
+  // 手機板
+  $nav-width: 240px;
+  $nav-width-lg: 200px;
+  &-phone {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: #dedede;
+    
+    z-index: 9;
+    transition-duration: 0.3s;
+    overflow: hidden;
+
+    display: none;
+    @media (max-width: $medium) {
+      display: flex;
+      flex-direction: column;
+    }
+
+    &.is-hidden {
+      opacity: 0;
+    }
+    &.is-show {
+      opacity: 1;
+      top: 0 !important;
+      left: 0 !important;
+    }
+  }
+  .phone {
+    &-header {
+      width: 100%;
+      height: fit-content;
+      border: 1px solid #adadad;
+    }
+    .header{
+      &-route {
+        width: inherit;
+        height: fit-content;
+        padding: 12px;
+        cursor: pointer;
+
+        background-color: inherit;
+        color: inherit;
+        transition-duration: 0.1s;
+        label {
+          transition-duration: 0.2s;
+        }
+        &:hover {
+          background-color: #38470b99;
+          color: #fff;
+        }
+      }
+      &-title {
+        width: inherit;
+        font-size: 1.3em;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+        .icon {
+          width: 30px !important;
+        }
+        & label {
+          width: 100%;
+          cursor: pointer;
+        }
+      }
+    }
+
+    &-body {
+      flex: 1;
+      width: 100%;
+      height: 100%;
+      padding: 16px;
       overflow: auto;
+    }
+
+    &-footer {
+      width: 100%;
+      height: fit-content;
+      border: 1px solid #adadad;
+    }
+
+    .nav {
+      &-routes {
+        display: flex;
+        width: 100%;
+        height: 100%;
+      }
+      &-route {
+        width: inherit;
+        height: fit-content;
+        padding: 16px;
+        cursor: pointer;
+
+        background-color: inherit;
+        color: inherit;
+        transition-duration: 0.1s;
+
+        label {
+          transition-duration: 0.2s;
+          transform: translateX(0px);
+        }
+        &:hover {
+          background-color: #38470b99;
+          color: #fff;
+
+          label {
+            transform: translateX(2px);
+          }
+        }
+      }
+      &-title {
+        width: inherit;
+        font-size: 1.3em;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+        .icon {
+          width: 30px !important;
+        }
+        & label {
+          width: 100%;
+          cursor: pointer;
+        }
+
+        &-left {
+          width: inherit;
+          display: flex;
+          gap: 16px; 
+        }
+      }
     }
   }
 }
