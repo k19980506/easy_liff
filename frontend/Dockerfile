@@ -6,9 +6,3 @@ WORKDIR /app/frontend
 
 # 複製專案檔案到映像中
 COPY . .
-
-# 安裝相依套件
-RUN npm install
-
-# 啟動應用
-CMD ["npm", "start"]

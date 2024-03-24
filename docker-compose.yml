@@ -6,7 +6,8 @@ services:
     build:
       context: ./frontend
     ports:
-      - "3001:3000" # 映射前端應用的端口
+      - "4040:4040" # 映射前端應用的端口
+    command: bash -c "npm install && npm start"
     volumes:
       - ./frontend:/app/frontend
 
