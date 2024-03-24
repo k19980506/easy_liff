@@ -12,35 +12,35 @@ user.save!
 user = User.first
 
 event = Event.new(
-  title: "202402",
-  start_date: "2024-02-01",
-  end_date: "2024-02-03",
+  title: '202402',
+  start_date: '2024-02-01',
+  end_date: '2024-02-03',
   options: [
     {
-      date: "2024-02-01",
+      date: '2024-02-01',
       status: {
         breakfast: false,
         lunch: false,
         dinner: true,
-        accommodation: true,
+        accommodation: true
       }
     },
     {
-      date: "2024-02-02",
+      date: '2024-02-02',
       status: {
         breakfast: true,
         lunch: true,
         dinner: true,
-        accommodation: true,
+        accommodation: true
       }
     },
     {
-      date: "2024-02-03",
+      date: '2024-02-03',
       status: {
         breakfast: true,
         lunch: true,
         dinner: false,
-        accommodation: false,
+        accommodation: false
       }
     }
   ]
@@ -52,30 +52,30 @@ attendance_record = AttendanceRecord.new(
   event_id: event.id,
   attendance_status: [
     {
-      date: "2024-02-01",
+      date: '2024-02-01',
       status: {
         breakfast: false,
         lunch: false,
         dinner: true,
-        accommodation: true,
+        accommodation: true
       }
     },
     {
-      date: "2024-02-02",
+      date: '2024-02-02',
       status: {
         breakfast: true,
         lunch: true,
         dinner: true,
-        accommodation: true,
+        accommodation: true
       }
     },
     {
-      date: "2024-02-03",
+      date: '2024-02-03',
       status: {
         breakfast: true,
         lunch: true,
         dinner: false,
-        accommodation: false,
+        accommodation: false
       }
     }
   ]
